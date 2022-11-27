@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-  const Web3 = require('web3');
+ /* const Web3 = require('web3');
   const abi = require('../constants/ABI.json');
 
   const web3 = new Web3('https://mainnet.infura.io/v3/c83c37fa3b754594ada81272a37fa9b7');
@@ -18,5 +18,5 @@
 
   const contract = new web3.eth.Contract(abi, address);
   const nftMetadata = contract.methods.tokenURI(tokenId).call().then((resolve:string) => console.log(resolve));
-  console.log(nftMetadata);
+  console.log(nftMetadata); */
 </script>

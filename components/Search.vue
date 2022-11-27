@@ -7,8 +7,8 @@ const inputTokenId = ref('');
 
 const onSubmit = async () => {
   try {
-    const web3 = new Web3('https://mainnet.infura.io/v3/c83c37fa3b754594ada81272a37fa9b7');
-    const address = '0xC7dF86762ba83f2a6197e1Ff9Bb40ae0f696B9E6';
+    const web3 = new Web3(`${process.env.MAINNET}`);
+    const address = process.env.ADDRESS;
     const contract = new web3.eth.Contract(ABI, address);
     const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call().then((resolve:string) => resolve);
 

@@ -1,17 +1,27 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'doggies-explorer',
+    title: 'Doggies Explorer',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Doogies explorer app' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap'
+        }
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -31,14 +41,17 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/style-resources'
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   styleResources: {
     scss: [
-      '~/assets/style/variables.scss',
+      '~/assets/styles/scss/abstracts/_colors.scss',
+      '~/assets/styles/scss/base/_base.scss',
     ],
   },
 }

@@ -29,11 +29,6 @@ export default {
     ADDRESS: '0xC7dF86762ba83f2a6197e1Ff9Bb40ae0f696B9E6',
   },
 
-  privateRuntimeConfig: {
-    MAINNET: '${MAINNET}',
-    ADDRESS: '${ADDRESS}'
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 

@@ -1,8 +1,9 @@
-import { INft } from '../../interfaces';
+import { INft } from '~/interfaces';
 
 export interface IMetadata {
     isLoading: boolean;
     data: INft;
+    error?: boolean
 }
 
 const  state = (): IMetadata => {

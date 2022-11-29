@@ -25,17 +25,14 @@ const onSubmit = async () => {
     const response = await fetch(`${nftMetadata}`);
     const data = await response.json();
 
-    console.log(data)
-
-    const newOrder = {
+    await store.dispatch('nft/getMetadata', {
       image: data?.image_url,
       description: data?.description,
       name: data?.name,
       attributes: data?.attributes
-    }
+    })
 
-    await store.dispatch('nft/getMetadata', { data: newOrder })
-
+    inputTokenId.value = '';
   } catch(e){
     console.log(e)
   }

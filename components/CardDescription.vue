@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <span>Card Description</span>
-    <div v-if="!isLoading">
-      {{ data }}
-    </div>
+  <div v-if={isLoading}>
+    <p>{{ img }}</p>
+    <p>{{ name }}</p>
+    <p>{{ description }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useMetadataStore } from '~/composables';
-const { isLoading, img, name, description, attributes, data } = useMetadataStore();
+
+const { description, img, name, isLoading } = useMetadataStore();
+
 </script>

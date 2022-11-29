@@ -1,13 +1,23 @@
 <template>
   <div class="card-description" v-if="!isLoading">
     <div class="card-description__content">
-      <div class="card-description__content__child-element">
-        <span>{{ owner }}</span>
-        <span>{{ name }}</span>
-        <span>{{ description }}</span>
+      <div class="card-description__child-element">
+        <div class="card-description__details">
+          <h2>Title and Owner</h2>
+          <span>
+            <b>Title:</b> {{ name }}
+          </span>
+          <span>
+            <b>Owner:</b> {{ owner }}
+          </span>
+        </div>
+        <div class="card-description__details">
+          <h2>Description</h2>
+          <span>{{ description }}</span>
+        </div>
       </div>
-      <div class="card-description__content__child-element">
-        <div class="card-description__content__child-element__image">
+      <div class="card-description__child-element">
+        <div class="card-description__image">
           <img v-bind:src=thumbnail v-bind:alt=name />
         </div>
       </div>
@@ -61,38 +71,53 @@
       @media(min-width: 1000px){
         flex-direction: row;
       }
+    }
 
-      &__child-element{
-        word-wrap: break-word;
+    &__child-element{
+      word-wrap: break-word;
 
-         @media(min-width: 200px){
-           width: 100%;
+      @media(min-width: 200px){
+        width: 100%;
 
-           &:last-child{
-             margin-top: 1rem;
-           }
-         }
-
-        @media(min-width: 1000px){
-          width: 50%;
-
-          &:first-child{
-            padding: 1rem 2rem;
-          }
+        &:last-child{
+          margin-top: 1rem;
         }
+      }
 
-        &__image {
-          width: 100%;
+      @media(min-width: 1000px){
+        width: 50%;
 
-          img {
-            width: 100%;
-            border-radius: 0.5rem;
-          }
+        &:first-child{
+          padding: 1rem 2rem;
         }
       }
     }
 
+    &__image {
+      width: 100%;
 
+      img {
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-size: 12px;
+      }
+
+      &:last-child{
+        margin-top: 2rem;
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+      }
+    }
   }
 </style>
 

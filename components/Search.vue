@@ -29,11 +29,19 @@
     h2 {
       margin: 2rem 0 2rem 0;
       color: $yellow;
+
+      @media(min-width: 200px){
+        margin: 1rem 0;
+      }
+
+      @media(min-width: 1000px){
+        margin: 2rem 0;
+      }
     }
 
     &__logo{
       @media(min-width: 200px){
-        width: 15.625rem;
+        width: 14rem;
       }
 
       @media(min-width: 1000px){
@@ -51,11 +59,13 @@
       flex-direction: column;
 
       @media(min-width: 200px){
-        width: 70%;
+        width: 80%;
+        text-align: center;
       }
 
       @media(min-width: 1000px){
         width: 18.75rem;
+        text-align: initial;
       }
 
       input {

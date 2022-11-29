@@ -11,9 +11,10 @@ const  state = (): IMetadata => {
         isLoading: true,
         data: {
             name: '',
+            owner: '',
+            thumbnail: '',
             description: '',
-            image: '',
-            attributes: [],
+            listOfTraits: [],
         },
     }
 }

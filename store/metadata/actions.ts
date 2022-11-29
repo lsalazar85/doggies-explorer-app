@@ -4,8 +4,20 @@ import { RootState } from '~/store';
 import { INft } from '~/interfaces';
 
 const actions: ActionTree<IMetadata, RootState> = {
-    getMetadata( { commit }, {name, description, image, attributes}: INft ) {
-        commit('setMetadata', {name, description, image, attributes});
+    getMetadata( { commit }, {
+        owner,
+        name,
+        description,
+        thumbnail,
+        listOfTraits
+    }: INft ) {
+        commit('setMetadata', {
+            owner,
+            name,
+            description,
+            thumbnail,
+            listOfTraits: [...listOfTraits]
+        });
     }
 }
 

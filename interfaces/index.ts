@@ -1,11 +1,12 @@
 interface IAttributes {
-    value: string | undefined;
-    trail_type: string;
+    value: string;
+    trait_type: string;
 }
 
 export interface INft {
-    name: string,
-    description: string,
-    image: string,
-    attributes: IAttributes[]
+    name: string;
+    owner: string;
+    thumbnail: string;
+    description: string;
+    listOfTraits: IAttributes[];
 }

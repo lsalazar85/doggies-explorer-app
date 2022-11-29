@@ -21,15 +21,19 @@ const onSubmit = async () => {
     const web3 = new Web3(`${process.env.MAINNET}`);
     const address = process.env.ADDRESS;
     const contract = new web3.eth.Contract(ABI, address);
-    const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call().then((resolve:string) => resolve);
+
+    const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call();
+    const owner = await contract.methods.ownerOf(inputTokenId.value).call();
+
     const response = await fetch(`${nftMetadata}`);
     const data = await response.json();
 
     await store.dispatch('nft/getMetadata', {
-      image: data?.image_url,
+      owner,
+      thumbnail: data?.image_url,
       description: data?.description,
       name: data?.name,
-      attributes: data?.attributes
+      listOfTraits: [...data?.attributes]
     })
 
     inputTokenId.value = '';

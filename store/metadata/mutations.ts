@@ -3,8 +3,20 @@ import { IMetadata } from './state';
 import { INft } from '~/interfaces';
 
 const mutation: MutationTree<IMetadata> = {
-    setMetadata( state:IMetadata, {name, description, image, attributes}: INft) {
-        state.data = {name, description, image, attributes}
+    setMetadata( state:IMetadata, {
+        owner,
+        name,
+        description,
+        thumbnail,
+        listOfTraits
+    }: INft) {
+        state.data = {
+            owner,
+            name,
+            description,
+            thumbnail,
+            listOfTraits: [...listOfTraits]
+        }
         state.isLoading = false
     },
 }

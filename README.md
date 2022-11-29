@@ -1,8 +1,8 @@
 # doggies-explorer-app
+
 Doggies explorer app development with Vue.js & Web3.js
 
 ## Deployment app
-
 
 ## Run
 
@@ -16,12 +16,9 @@ $ npm run dev
 # build for production and launch server
 $ npm run build
 $ npm run start
-
-# generate static project
-$ npm run generate
 ```
-Starts on `http://localhost:3000`
 
+Starts on `http://localhost:3000`
 
 ## Development technologies and external packages
 

@@ -8,6 +8,7 @@
 <style lang="scss">
 main {
   background-image: $gradient;
+
   @media (min-width: 200px) {
     padding-top: 2rem;
   }

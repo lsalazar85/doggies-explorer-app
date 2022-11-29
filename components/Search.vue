@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: center;
     transition: all 0.2s;
+    margin-bottom: 2rem;
 
     img {
       width: 100%;

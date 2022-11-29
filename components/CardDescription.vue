@@ -23,9 +23,16 @@
       </div>
     </div>
     <div class="card-description__traits">
-      <li v-for="item in listOfTraits">
-        <span>{{ item.trait_type }} - {{ item.value}}</span>
-      </li>
+      <h2>List of traits</h2>
+      <div class="card-description__traits-container" v-for="trait in listOfTraits">
+        <div class="card-description__trait">
+          <span>{{trait.trait_type}}</span>
+        </div>
+        <div class="card-description__trait">
+          <span v-if="trait.value">{{trait.value}}</span>
+          <span v-if="!trait.value">N/A</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,8 +41,15 @@
   .card-description {
     display: flex;
     flex-direction: column;
-    padding: 0 2rem 2rem 2rem;
     overflow-y: auto;
+
+    @media(min-width: 200px){
+      padding: 0 1.2rem;
+    }
+
+    @media(min-width: 1000px){
+      padding: 0 2rem 2rem 2rem;
+    }
 
     &::-webkit-scrollbar {
       width: 0.15rem;
@@ -78,10 +92,6 @@
 
       @media(min-width: 200px){
         width: 100%;
-
-        &:last-child{
-          margin-top: 1rem;
-        }
       }
 
       @media(min-width: 1000px){
@@ -89,6 +99,8 @@
 
         &:first-child{
           padding: 1rem 2rem;
+          border: 1px solid $darkGreen;
+          border-radius: 0.5rem;
         }
       }
     }
@@ -99,6 +111,10 @@
       img {
         width: 100%;
         border-radius: 0.5rem;
+      }
+
+      @media(max-width: 1000px) {
+        margin-top: 1rem;
       }
     }
 
@@ -116,6 +132,36 @@
 
       h2 {
         margin-bottom: 1rem;
+      }
+    }
+
+    &__traits {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &__traits-container {
+      display: flex;
+      justify-content: space-between;
+
+      &:nth-child( odd ){
+        background: $lightGreen;
+      }
+    }
+
+    &__trait {
+      width: 50%;
+      border: 1px solid $darkGreen;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+
+      &:first-child{
+        font-weight: 700;
       }
     }
   }

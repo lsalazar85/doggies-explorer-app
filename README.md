@@ -25,7 +25,7 @@ Starts on `http://localhost:3000`
 - The project is developed with Nuxt.js and Typescript.
 - It is 100% multi-devices and all the UI is developed with Sass.
 - I implemented [Web3.js](https://web3js.readthedocs.io/en/v1.8.1/) as a connection interface to get the data of an NFT for its token.
-- Traits is a table-type component that I developed for the trait list I didn't like how it was implemented with data, but I decided to keep it in the component list with its unit test.
+- Traits is a table-type component that I developed for the traits list, but I didn't like it when it was implemented with data, but I decided to keep it in the component list with its unit test.
 
 ## Future Improvements
 - Add unit tests for store state and interactions.

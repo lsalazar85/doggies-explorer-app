@@ -1,5 +1,5 @@
 <template>
-  <div class="card-description" v-if="!isLoading">
+  <div class="card-description" v-if="!isLoading && Object.keys(listOfTraits).length && !error">
     <div class="card-description__content">
       <div class="card-description__child-element">
         <div class="card-description__details">
@@ -35,9 +35,30 @@
       </div>
     </div>
   </div>
+  <div class="not-data" v-else-if="isLoading && !error">
+    <Loader />
+  </div>
+  <div class="not-data" v-else>
+      <span v-if="error">Token ID not found</span>
+  </div>
 </template>
 
 <style lang="scss">
+  .not-data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: $darkGreen;
+    }
+  }
+
   .card-description {
     display: flex;
     flex-direction: column;
@@ -123,7 +144,7 @@
       flex-direction: column;
 
       span {
-        font-size: 12px;
+        font-size: 0.75rem;
       }
 
       &:last-child{
@@ -168,6 +189,7 @@
 </style>
 
 <script lang="ts" setup>
+import Loader from '~/components/Loader.vue'
 import { useMetadataStore } from '~/composables';
 
 const {
@@ -176,7 +198,8 @@ const {
   name,
   isLoading,
   listOfTraits,
-  owner
+  owner,
+  error,
 } = useMetadataStore();
 
 </script>

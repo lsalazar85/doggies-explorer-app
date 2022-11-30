@@ -18,7 +18,13 @@ const actions: ActionTree<IMetadata, RootState> = {
             thumbnail,
             listOfTraits: [...listOfTraits]
         });
-    }
+    },
+    getError({ commit }, { error }: IMetadata){
+        commit('setError', { error })
+    },
+    getLoading({ commit }, { isLoading }: IMetadata){
+        commit('setLoading', { isLoading })
+    },
 }
 
 export default actions;

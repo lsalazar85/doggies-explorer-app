@@ -17,8 +17,13 @@ const mutation: MutationTree<IMetadata> = {
             thumbnail,
             listOfTraits: [...listOfTraits]
         }
-        state.isLoading = false
     },
+    setError(state:IMetadata, { error }: IMetadata){
+        state.error = error
+    },
+    setLoading(state:IMetadata, { isLoading }: IMetadata){
+        state.isLoading = isLoading
+    }
 }
 
 export default mutation;

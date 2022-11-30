@@ -4,6 +4,7 @@ import { store } from '~/store';
 export const useMetadataStore = () => {
     return {
         isLoading: computed(() => store.state.nft.isLoading),
+        error: computed(() => store.state.nft.error),
         thumbnail: computed(() => store.state.nft.data.thumbnail),
         name: computed(() => store.state.nft.data.name),
         description: computed(() => store.state.nft.data.description),

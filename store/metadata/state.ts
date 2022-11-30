@@ -9,6 +9,7 @@ export interface IMetadata {
 const  state = (): IMetadata => {
     return {
         isLoading: true,
+        error: false,
         data: {
             name: '',
             owner: '',

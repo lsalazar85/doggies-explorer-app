@@ -81,12 +81,13 @@
         width: 9.375rem;
         height: 1.875rem;
         background: $yellow;
-        border: 1px solid $black;
+        border: 2px solid $yellow;
         font-weight: 700;
         font-size: 0.9rem;
         border-radius: 0.2rem;
         margin: 0 auto;
         cursor: pointer;
+        color: $darkGreen;
 
         &:hover {
           opacity: 0.85;
@@ -112,6 +113,9 @@ const onSubmit = async () => {
     const address = process.env.ADDRESS;
     const contract = new web3.eth.Contract(ABI, address);
 
+    await store.dispatch('nft/getLoading', { isLoading: true });
+    await store.dispatch('nft/getError', { error: false });
+
     const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call();
     const owner = await contract.methods.ownerOf(inputTokenId.value).call();
 
@@ -126,9 +130,19 @@ const onSubmit = async () => {
       listOfTraits: [...data?.attributes]
     })
 
+    await store.dispatch('nft/getLoading', { isLoading: false });
     inputTokenId.value = '';
+    console.log(store.state.nft)
+
   } catch(e){
-    console.log(e)
+    await store.dispatch('nft/getMetadata', {
+      owner: '',
+      thumbnail: '',
+      description: '',
+      name: '',
+      listOfTraits: []
+    })
+    await store.dispatch('nft/getError', { error: true })
   }
 }
 </script>

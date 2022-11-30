@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  name: "Loader",
+});
+</script>
+
 <style lang="scss">
   .loader {
     width: 100%;
@@ -26,11 +34,3 @@
     }
   }
 </style>
-
-<script lang="ts">
-import Vue from "vue";
-
-export default Vue.extend({
-  name: "Loader",
-});
-</script>

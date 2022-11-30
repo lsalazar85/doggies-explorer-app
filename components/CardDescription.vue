@@ -1,68 +1,72 @@
 <template>
-  <div class="card-description" v-if="!isLoading && Object.keys(listOfTraits).length && !error">
-    <div class="card-description__content">
-      <div class="card-description__child-element">
-        <div class="card-description__details">
-          <h2>Title and Owner</h2>
-          <span>
-            <b>Title:</b> {{ name }}
+  <div class="card-description">
+    <div v-if="!isLoading">
+      <div class="card-description__content">
+        <div class="card-description__child-element">
+          <div class="card-description__details">
+            <h2>Title and Owner</h2>
+            <span>
+            <b>Title:</b> {{name}}
           </span>
-          <span>
-            <b>Owner:</b> {{ owner }}
+            <span>
+            <b>Owner:</b> {{owner}}
           </span>
+          </div>
+          <div class="card-description__details">
+            <h2>Description</h2>
+            <span>{{description}}</span>
+          </div>
         </div>
-        <div class="card-description__details">
-          <h2>Description</h2>
-          <span>{{ description }}</span>
+        <div class="card-description__child-element">
+          <div class="card-description__image">
+            <img v-bind:src=thumbnail v-bind:alt=name />
+          </div>
         </div>
       </div>
-      <div class="card-description__child-element">
-        <div class="card-description__image">
-          <img v-bind:src=thumbnail v-bind:alt=name />
+      <div class="card-description__traits">
+        <h2>List of traits</h2>
+        <div class="card-description__traits-container" v-for="(trait, idx) in listOfTraits" :key="idx">
+          <div class="card-description__trait">
+            <span>{{trait.trait_type}}</span>
+          </div>
+          <div class="card-description__trait">
+            <span v-if="trait.value">{{trait.value}}</span>
+            <span v-if="!trait.value">N/A</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="card-description__traits">
-      <h2>List of traits</h2>
-      <div class="card-description__traits-container" v-for="trait in listOfTraits">
-        <div class="card-description__trait">
-          <span>{{trait.trait_type}}</span>
-        </div>
-        <div class="card-description__trait">
-          <span v-if="trait.value">{{trait.value}}</span>
-          <span v-if="!trait.value">N/A</span>
-        </div>
-      </div>
+    <div class="not-data" v-else-if="isLoading && !error">
+      <Loader />
     </div>
-  </div>
-  <div class="not-data" v-else-if="isLoading && !error">
-    <Loader />
-  </div>
-  <div class="not-data" v-else>
+    <div class="not-data" v-else>
       <span v-if="error">Token ID not found</span>
+    </div>
   </div>
 </template>
 
+<script lang="ts" setup>
+import { useMetadataStore } from '~/composables';
+import Loader from '~/components/Loader.vue'
+
+const {
+  description,
+  thumbnail,
+  name,
+  isLoading,
+  listOfTraits,
+  owner,
+  error,
+} = useMetadataStore();
+
+</script>
+
 <style lang="scss">
-  .not-data {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    span {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: $darkGreen;
-    }
-  }
-
   .card-description {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    height: 100vh;
 
     @media(min-width: 200px){
       padding: 0 1.2rem;
@@ -186,20 +190,19 @@
       }
     }
   }
+
+  .not-data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: $darkGreen;
+    }
+  }
 </style>
-
-<script lang="ts" setup>
-import Loader from '~/components/Loader.vue'
-import { useMetadataStore } from '~/composables';
-
-const {
-  description,
-  thumbnail,
-  name,
-  isLoading,
-  listOfTraits,
-  owner,
-  error,
-} = useMetadataStore();
-
-</script>

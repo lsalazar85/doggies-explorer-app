@@ -14,6 +14,15 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+const props = defineProps({
+  traits:{
+    type: Array,
+    required: true
+  }
+})
+</script>
+
 <style lang="scss">
   .table{
     display: flex;
@@ -62,12 +71,3 @@
     }
   }
 </style>
-
-<script lang="ts" setup>
-  const props = defineProps({
-    traits:{
-      type: Array,
-      required: true
-    }
-  })
-</script>

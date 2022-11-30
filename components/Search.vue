@@ -3,7 +3,7 @@
     <div class="search-container__logo">
       <img src="~/assets/images/snoop-logo.svg" alt="Main Logo" />
     </div>
-    <h2>Dogggies Explorer</h2>
+    <h2>Doggies Explorer</h2>
     <form class="search-container__form" @submit.prevent="onSubmit()">
       <span class="search-container__label">Token ID</span>
       <input v-model.number="inputTokenId" placeholder="e.g  1411" />
@@ -11,6 +11,54 @@
     </form>
   </div>
 </template>
+
+<script lang="ts" setup>
+import Web3 from 'web3';
+import { ref } from 'vue';
+
+import ABI from '../constants/ABI.json';
+import { store } from '~/store';
+
+const inputTokenId = ref('');
+
+const onSubmit = async () => {
+  try {
+    const web3 = new Web3(`${process.env.MAINNET}`);
+    const address = process.env.ADDRESS;
+    const contract = new web3.eth.Contract(ABI, address);
+
+    await store.dispatch('nft/getLoading', { isLoading: true });
+    await store.dispatch('nft/getError', { error: false });
+
+    const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call();
+    const owner = await contract.methods.ownerOf(inputTokenId.value).call();
+
+    const response = await fetch(`${nftMetadata}`);
+    const data = await response.json();
+
+    await store.dispatch('nft/getMetadata', {
+      owner,
+      thumbnail: data?.image_url,
+      description: data?.description,
+      name: data?.name,
+      listOfTraits: [...data?.attributes]
+    })
+
+    await store.dispatch('nft/getLoading', { isLoading: false });
+    inputTokenId.value = '';
+
+  } catch(e){
+    await store.dispatch('nft/getMetadata', {
+      owner: '',
+      thumbnail: '',
+      description: '',
+      name: '',
+      listOfTraits: []
+    })
+    await store.dispatch('nft/getError', { error: true })
+  }
+}
+</script>
 
 <style lang="scss">
   .search-container {
@@ -29,13 +77,10 @@
     h2 {
       margin: 2rem 0 2rem 0;
       color: $yellow;
+      font-size: 1.3rem;
 
       @media(min-width: 200px){
-        margin: 1rem 0;
-      }
-
-      @media(min-width: 1000px){
-        margin: 2rem 0;
+        margin: 0 0 1rem 0;
       }
     }
 
@@ -97,52 +142,3 @@
     }
   }
 </style>
-
-<script lang="ts" setup>
-import Web3 from 'web3';
-import { ref } from 'vue';
-
-import ABI from '../constants/ABI.json';
-import { store } from '~/store';
-
-const inputTokenId = ref('');
-
-const onSubmit = async () => {
-  try {
-    const web3 = new Web3(`${process.env.MAINNET}`);
-    const address = process.env.ADDRESS;
-    const contract = new web3.eth.Contract(ABI, address);
-
-    await store.dispatch('nft/getLoading', { isLoading: true });
-    await store.dispatch('nft/getError', { error: false });
-
-    const nftMetadata = await contract.methods.tokenURI(inputTokenId.value).call();
-    const owner = await contract.methods.ownerOf(inputTokenId.value).call();
-
-    const response = await fetch(`${nftMetadata}`);
-    const data = await response.json();
-
-    await store.dispatch('nft/getMetadata', {
-      owner,
-      thumbnail: data?.image_url,
-      description: data?.description,
-      name: data?.name,
-      listOfTraits: [...data?.attributes]
-    })
-
-    await store.dispatch('nft/getLoading', { isLoading: false });
-    inputTokenId.value = '';
-    console.log(store.state.nft)
-
-  } catch(e){
-    await store.dispatch('nft/getMetadata', {
-      owner: '',
-      thumbnail: '',
-      description: '',
-      name: '',
-      listOfTraits: []
-    })
-    await store.dispatch('nft/getError', { error: true })
-  }
-}
-</script>

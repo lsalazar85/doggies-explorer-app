@@ -1,16 +1,14 @@
-import { mount } from '@vue/test-utils';
-import CardDescription from '../components/CardDescription.vue';
+import { mount } from "@vue/test-utils";
+import CardDescription from "../components/CardDescription.vue";
 
-describe('<CardDescription />', () => {
-    test('Should mount component and contain first title', () => {
-        const wrapper = mount(CardDescription);
-        const title = wrapper.get('h2');
+describe("<CardDescription />", () => {
+  test("Render successfully", () => {
+    const wrapper = mount(CardDescription);
+    expect(wrapper).toBeTruthy();
+  });
 
-        expect(title.text()).toContain('Title and Owner');
-    })
-
-    test('Render successfully', () => {
-        const wrapper = mount(CardDescription);
-        expect(wrapper).toBeTruthy();
-    })
-})
+  test("Should mount component and contain main div", () => {
+    const wrapper = mount(CardDescription);
+      expect(wrapper.html()).toContain('<div class="card-description">')
+  });
+});

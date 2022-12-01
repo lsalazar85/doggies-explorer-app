@@ -1,6 +1,6 @@
 <template>
   <div class="card-description">
-    <div v-if="!isLoading && (listOfTraits && listOfTraits.length)">
+    <div v-if="!isLoading && (listOfTraits && listOfTraits.length && !error)">
       <div class="card-description__content">
         <div class="card-description__child-element">
           <div class="card-description__details">

@@ -36,8 +36,11 @@
         </div>
       </div>
     </div>
-    <div class="not-data" v-if="isLoading && !error">
+    <div v-else-if="isLoading && !error">
       <Loader />
+    </div>
+    <div class="not-data" v-else>
+      <span v-if="error">Token ID not found</span>
     </div>
   </div>
 </template>

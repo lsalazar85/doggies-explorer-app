@@ -20,16 +20,13 @@ export default Vue.extend({
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 2rem;
 
     img {
       display: inline-flex;
 
       @media(min-width: 200px){
-        width: 18rem;
-      }
-
-      @media(min-width: 1000px){
-        width: 23rem;
+        width: 13rem;
       }
     }
   }
